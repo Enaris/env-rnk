@@ -1,0 +1,12 @@
+.added-image-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .added-image {
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 600px;
+    max-width: 1000px;
+  }
+}
