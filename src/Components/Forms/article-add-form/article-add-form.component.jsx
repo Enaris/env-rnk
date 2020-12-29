@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import FileDropPreview from '../../General/file-drop-preview/file-drop-preview.component';
 import MuiFTxtField from '../Formik/mui-f-txt-field/mui-f-txt-field.component';
 import QuillFField from '../Formik/quill-f-field/quill-f-field.component';
 import './article-add-form.styles.scss';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../../Redux/auth/auth.selectors';
+import { formToAddArticleData } from './article-add-form.helpers';
+import { articleAddStart } from '../../../Redux/article/article.actions';
 
-const ArticleAddForm = () => {
+const ArticleAddForm = ({ user, addArticle }) => {
 
   const [ cover, setCover ] = useState(null);
 
   const handleDropImg = img => setCover(img);
   const handleRemoveImg = () => setCover(null);
+  const handleSubmit = v => {
+    addArticle(formToAddArticleData(v, cover, user.aspUserId))
+  }
 
   return (
     <div className='min-vw50 my5'>
@@ -31,7 +39,7 @@ const ArticleAddForm = () => {
           title: '',
           description: ''
         }}
-        onSubmit={ v => console.log(v) }
+        onSubmit={ v => handleSubmit(v) }
       >
         <Form className='login-form'>
           
@@ -55,4 +63,12 @@ const ArticleAddForm = () => {
   )
 }
 
-export default ArticleAddForm;
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+  addArticle: data => dispatch(articleAddStart(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleAddForm);

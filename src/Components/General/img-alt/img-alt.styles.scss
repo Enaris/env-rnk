@@ -1,0 +1,14 @@
+.img-alt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .alt-label {
+    color: white;
+    font-size: 2.9rem;
+    //word-spacing: 250px;
+    text-align: center;
+    line-height: 1.7;
+  }
+}

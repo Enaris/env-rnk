@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Button, Link, Toolbar } from '@material-ui/core';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
 import './nav-bar.styles.scss';
 import { logout } from '../../../Redux/auth/auth.actions';
 import { selectCurrentUser } from '../../../Redux/auth/auth.selectors';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 const NavBar = ({ user, logout}) => {
 
@@ -12,25 +13,45 @@ const NavBar = ({ user, logout}) => {
     <AppBar position="relative" style={{ background: '#102026' }}>
       <Toolbar>
         <div className='nav-links'>
-          <Button className='mr5px'>
-            <Link href='/new'> New </Link>
-          </Button>
-          <Button className='mr5px'>
-            <Link href='/ranking' > Ranking </Link>
-          </Button>
-          <Button className='last-left-link'>
-            <Link href='/trending' className='last-left-link'> Trending </Link>
-          </Button>
+          <Link className='mr5px' to='/articles/new'> 
+            <Button> 
+              New
+            </Button>
+          </Link>
+          <Link className='mr5px' to='/articles/ranking' >
+            <Button >
+              Ranking
+            </Button>
+          </Link>
+          <Link className={ user ? 'mr5px' : 'last-left-link'} to='/articles/trending'> 
+            <Button >
+              Trending
+            </Button>
+          </Link>
+          {
+            user && 
+            <Link className='last-left-link' to='/article/add'>
+              <Button >
+                Add 
+              </Button>
+            </Link>
+          }
 
           { 
             !user ?
             <React.Fragment>
-              <Button className='mr5px'>
-                <Link href='/login' > Login </Link>
-              </Button>
-              <Button>
-                <Link href='/register'> Register </Link>
-              </Button>
+              <Link className='mr5px' to='/login' > 
+                <Button >
+                  Login 
+                </Button>
+              </Link>
+              
+              <Link to='/register'> 
+                <Button>
+                  Register 
+                </Button>
+              </Link>
+              
             </React.Fragment>
             : 
             <Button onClick={() => logout()}> Logout </Button>

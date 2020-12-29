@@ -10,5 +10,11 @@ export const authUrl = `${apiUrl}/auth`;
 export const registerUrl = `${authUrl}/register`;
 export const loginUrl = `${authUrl}/login`;
 
-// ------------------- AUTH -------------------
+// ------------------- ARTICLE -------------------
 export const articleUrl = `${apiUrl}/article`;
+export const articlePointUrl = (aspUserId, articleId, point) => 
+  `${articleUrl}/u/${aspUserId}/a/${articleId}/${point}`;
+export const articleDetailsUrl = (aspUserId, articleId) => 
+  `${articleUrl}/u/${aspUserId}/a/${articleId}`;
+  export const articleDeleteUrl = (aspUserId, articleId) => 
+  `${articleUrl}/u/${aspUserId}/a/${articleId}`;
