@@ -131,3 +131,12 @@ body, html, #root {
 .bg-black {
   background-color: black;
 }
+
+.a, a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: lightblue;
+
+  &:hover {
+    color: rgb(117, 198, 224)
+  }
+}

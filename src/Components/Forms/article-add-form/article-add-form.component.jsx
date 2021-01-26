@@ -22,7 +22,7 @@ const ArticleAddForm = ({ user, addArticle }) => {
   }
 
   return (
-    <div className='min-vw50 my5'>
+    <div className='max-w-1000'>
 
       <div className='added-image-container mb5'>
         <div className='added-image'>
