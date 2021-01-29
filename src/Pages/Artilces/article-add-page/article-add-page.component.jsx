@@ -5,7 +5,7 @@ import './article-add-page.styles.scss';
 const ArticleAddPage = () => {
 
   return (
-    <div className='page-flex flex-center p5'>
+    <div className='page-flex flex-justify p5'>
       <ArticleAddForm />
     </div>
   )

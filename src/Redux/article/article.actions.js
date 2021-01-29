@@ -44,6 +44,21 @@ export const pointArticleFailure = error => ({
   payload: error
 })
 
+export const rmvScoreStart = data => ({
+  type: ArticleActionTypes.RMV_SCORE_START, 
+  payload: data
+})
+
+export const rmvScoreSuccess = article => ({
+  type: ArticleActionTypes.RMV_SCORE_SUCCESS, 
+  payload: article
+})
+
+export const rmvScoreFailure = error => ({
+  type: ArticleActionTypes.RMV_SCORE_FAILURE, 
+  payload: error
+})
+
 export const getArticleStart = data => ({
   type: ArticleActionTypes.GET_ARTICLE_START, 
   payload: data

@@ -14,6 +14,8 @@ export const loginUrl = `${authUrl}/login`;
 export const articleUrl = `${apiUrl}/article`;
 export const articlePointUrl = (aspUserId, articleId, point) => 
   `${articleUrl}/u/${aspUserId}/a/${articleId}/${point}`;
+export const articleRmvScore = (aspUserId, articleId) => 
+  `${articleUrl}/u/${aspUserId}/a/${articleId}/rmvScore`;
 export const articleDetailsUrl = (aspUserId, articleId) => 
   `${articleUrl}/u/${aspUserId}/a/${articleId}`;
   export const articleDeleteUrl = (aspUserId, articleId) => 

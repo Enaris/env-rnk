@@ -4,11 +4,12 @@ import ImgAlt from '../../General/img-alt/img-alt.component';
 import { format } from 'date-fns';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
+import CancelIcon from '@material-ui/icons/Cancel';
 import './article-details.styles.scss';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../Redux/auth/auth.selectors';
-import { selectArticleDetails, selectLoadingArticlesIds } from '../../../Redux/article/article.selectors';
-import { deleteArticleStart, pointArticleStart } from '../../../Redux/article/article.actions';
+import { selectLoadingArticlesIds } from '../../../Redux/article/article.selectors';
+import { deleteArticleStart, pointArticleStart, rmvScoreStart } from '../../../Redux/article/article.actions';
 import { imageUrl } from '../../../Utils/api-urls';
 import { Button, Grid, Tab, Tabs } from '@material-ui/core';
 import { a11yProps } from '../../../Utils/mui-helpers';
@@ -20,6 +21,7 @@ const ArticleDetails = ({
   user, 
   loadingIds,
   deleteArticle,
+  rmvScore,
   article: 
   { 
     id,
@@ -41,6 +43,9 @@ const ArticleDetails = ({
   const loadingPoints = loadingIds && (loadingIds.find(i => i === id) != null);
   const handlePoint = point => {
     pointArticle({ aspUserId: user.aspUserId, articleId: id, point: point })
+  }
+  const handleRmvScore = () => {
+    rmvScore({ aspUserId: user.aspUserId, articleId: id })
   }
   const handleConfirmDelete = () => {
     if (user)
@@ -76,6 +81,13 @@ const ArticleDetails = ({
               onClick={ () => handlePoint(-1) }
             >
               { minuses }
+            </Button>
+            <Button 
+              startIcon={ <CancelIcon /> } 
+              disabled={ !user || (!userMinused && !userPlused) || loadingPoints }
+              size="large"
+              onClick={ () => handleRmvScore() }
+            >
             </Button>
           </div>
           <div className='article-details-top-desc-added mb5'>
@@ -139,6 +151,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   pointArticle: data => dispatch(pointArticleStart(data)),
+  rmvScore: data => dispatch(rmvScoreStart(data)),
   deleteArticle: data => dispatch(deleteArticleStart(data))
 })
 

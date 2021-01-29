@@ -53,6 +53,7 @@ const ArticleReducer = (state = INITIAL_STATE, action) => {
         fetchingArticles: false,
       }
 
+    case ArticleActionTypes.RMV_SCORE_START:
     case ArticleActionTypes.POINT_ARTICLE_START: 
       return {
         ...state,
@@ -60,6 +61,7 @@ const ArticleReducer = (state = INITIAL_STATE, action) => {
           ? [ ...state.loadingArticleIds, action.payload.articleId ]
           : [ action.payload.articleId ]
       }
+    case ArticleActionTypes.RMV_SCORE_SUCCESS:
     case ArticleActionTypes.POINT_ARTICLE_SUCCESS:
       const { pluses, minuses, id, userPlused, userMinused } = action.payload;
       return {
@@ -68,11 +70,33 @@ const ArticleReducer = (state = INITIAL_STATE, action) => {
         articles: state.articles.map(a => a.id === id ? { ...a, pluses: pluses, minuses: minuses, userPlused: userPlused, userMinused: userMinused } : a),
         loadingArticleIds: state.loadingArticleIds.filter(i => i !== id)
       }
+    case ArticleActionTypes.RMV_SCORE_FAILURE:
     case ArticleActionTypes.POINT_ARTICLE_FAILURE:
       return {
         ...state,
         loadingArticleIds: state.loadingArticleIds.filter(i => i !== action.payload.id)
       }
+
+    // case ArticleActionTypes.RMV_SCORE_START: 
+    //   return {
+    //     ...state,
+    //     loadingArticleIds: state.loadingArticleIds 
+    //       ? [ ...state.loadingArticleIds, action.payload.articleId ]
+    //       : [ action.payload.articleId ]
+    //   }
+    // case ArticleActionTypes.RMV_SCORE_SUCCESS:
+    //   const { pluses, minuses, id, userPlused, userMinused } = action.payload;
+    //   return {
+    //     ...state,
+    //     article: state.article == null ? null : { ...state.article, pluses: pluses, minuses: minuses, userPlused: userPlused, userMinused: userMinused },
+    //     articles: state.articles.map(a => a.id === id ? { ...a, pluses: pluses, minuses: minuses, userPlused: userPlused, userMinused: userMinused } : a),
+    //     loadingArticleIds: state.loadingArticleIds.filter(i => i !== id)
+    //   }
+    // case ArticleActionTypes.RMV_SCORE_FAILURE:
+    //   return {
+    //     ...state,
+    //     loadingArticleIds: state.loadingArticleIds.filter(i => i !== action.payload.id)
+    //   }
 
     case ArticleActionTypes.GET_ARTICLE_START: 
       return {

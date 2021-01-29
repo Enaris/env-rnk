@@ -9,7 +9,7 @@ const HomePage = ({ user, logout }) => {
 
   return (
     <div className='home-page'>
-      asddsada
+      Home page 
     </div>
   )
 }
